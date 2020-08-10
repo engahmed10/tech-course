@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :tech_courses
+  resources :courses
   resources :teches
   devise_for :users
   root 'teches#index'

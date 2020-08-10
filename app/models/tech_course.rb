@@ -1,0 +1,2 @@
+class TechCourse < ApplicationRecord
+end
