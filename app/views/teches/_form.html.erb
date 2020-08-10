@@ -1,7 +1,10 @@
-<%=form_for @tech do |f|%>
+<%=form_for @tech ,html: {multipart: true} do |f|%>
+<%=f.label :image%><br>
+<%= f.file_field :image %><br>
 <%=f.label :name%>
 <%=f.text_field :name%>
 <%=f.label :resource%>
 <%=f.text_field :resource%>
 <%=f.button %>
 <%end%>
+

@@ -48,7 +48,7 @@ class TechesController < ApplicationController
     private
     
     def tech_params
-      params.require(:tech).permit(:name,:resource)
+      params.require(:tech).permit(:name,:resource,:image)
     end
 
     def find_tech
