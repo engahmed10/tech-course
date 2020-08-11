@@ -1,5 +1,6 @@
 class CoursesController < ApplicationController
   before_action: find_course
+  before_action: authenticate_admin! ,only: [:index,:show]
 
     def index
       @courses=Course.all
@@ -7,7 +8,7 @@ class CoursesController < ApplicationController
 
     def new
         # code
-       
+        
     end
 
     def create
