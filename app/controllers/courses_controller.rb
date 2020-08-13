@@ -1,14 +1,25 @@
 class CoursesController < ApplicationController
-  before_action: find_course
-  before_action: authenticate_admin! ,only: [:index,:show]
+  before_action :find_course
+  before_action :authenticate_user! 
+  #before_action :authenticate_admin! ,only: [:index,:show]
 
     def index
-      @courses=Course.all
+
+       if params[:tech_id]
+            @tech = Tech.find_by(parame[:tech_id])
+            if @tech.nil?
+                redirect_to Something_path alert 'Tech not found'
+            else
+              @courses = @tech.courses
+            end
+        else
+            @courses=Course.all
+        end
+      
     end
 
-    def new
-        # code
-        
+    def new    
+
     end
 
     def create

@@ -1,8 +1,9 @@
 class TechesController < ApplicationController
 
     before_action :authenticate_user!,except: [:index,:show]
-    before_action: authenticate_admin! ,only: [:index,:show]
-    before_action :find_tech,only: [:show,:update,:edit,:destroy]
+    #before_action :authenticate_admin! ,only: [:index,:show]
+    before_action :find_tech ,only: [:show,:update,:edit,:destroy]
+    
     
     def index
         @teches =Tech.all

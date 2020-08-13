@@ -1,17 +1,21 @@
 Rails.application.routes.draw do
 
+
   resources :tech_courses
   resources :courses
   resources :teches
-  devise_for :users
-
+  
   resources :teches do 
-    resources :courses
+   resources :courses
   end
   
+
+
+devise_for :users,path_names: {sign_in: "login", sign_out: "logout" }, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+
+
   root 'teches#index'
-  get '/users/sign_out' => "session#destroy"
+  get '/users/log_out' => "application#destroy"
   get 'teches/:id/delete' => "teches#destroy"
 
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
