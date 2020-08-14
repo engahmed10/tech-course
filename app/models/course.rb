@@ -1,4 +1,6 @@
 class Course < ApplicationRecord
-  has_many :teches, through: :tech_course
+
+  has_many :t_courses
+  has_many :teches, through: :t_courses
     
 end

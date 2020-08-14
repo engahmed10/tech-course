@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 202008080210763) do
     t.index ["updated_at"], name: "index_sessions_on_updated_at"
   end
 
-  create_table "tech_courses", force: :cascade do |t|
+  create_table "t_courses", force: :cascade do |t|
     t.integer "tech_id"
     t.integer "course_id"
     t.datetime "created_at", precision: 6, null: false

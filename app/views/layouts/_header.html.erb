@@ -19,7 +19,7 @@
         <li><%=link_to 'Sign up', new_user_registration_path %></li>
      
         <%else%>
-        <li><%=link_to 'Log out',"users/log_out"%></li>
+        <li><%=link_to 'Log out',{controller: "application",action:"destroy"}%></li>
         <%end%>
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">MORE

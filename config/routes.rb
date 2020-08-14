@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
 
-  resources :tech_courses
+  resources :techcourses
   resources :courses
   resources :teches
   

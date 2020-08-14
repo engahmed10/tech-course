@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
    end
 
    private
+
    def authenticate_admin!
        authenticate_user!
        head :forbidden unless current_user.admin?

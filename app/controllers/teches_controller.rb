@@ -1,7 +1,8 @@
 class TechesController < ApplicationController
 
-    before_action :authenticate_user!,except: [:index,:show]
-    #before_action :authenticate_admin! ,only: [:index,:show]
+   # before_action :authenticate_user!
+    before_action :authenticate_admin! ,except: [:index,:show]
+
     before_action :find_tech ,only: [:show,:update,:edit,:destroy]
     
     
@@ -15,6 +16,7 @@ class TechesController < ApplicationController
 
     def new
       @tech=current_user.teches.build
+   
     end
     
     def create
