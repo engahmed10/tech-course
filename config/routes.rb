@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
 
 
-  resources :techcourses
+  resources :institutes
+  resources :educations
   resources :courses
-  resources :teches
+ 
   
-  resources :teches do 
+  resources :educations do 
    resources :courses
   end
   
@@ -14,8 +15,8 @@ Rails.application.routes.draw do
 devise_for :users,path_names: {sign_in: "login", sign_out: "logout" }, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
 
-  root 'teches#index'
+  root 'educations#index'
   get '/users/log_out' => "application#destroy"
-  get 'teches/:id/delete' => "teches#destroy"
+  #get 'educations/:id/delete' => "educations#destroy"
 
 end

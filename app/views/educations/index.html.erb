@@ -1,11 +1,11 @@
 <div class="container">
    <div class="row">
-      <% @teches.each do |tech|%>
+      <% @educations.each do |education|%>
        <div class="col-sm-4 ">
            <div class="thumbnail">
-              <%=image_tag tech.image.url%><br> 
+              <%=image_tag education.image.url%><br> 
                 <div class="caption">
-                  <%=link_to tech.name ,tech_courses_path(tech)%><br>
+                  <%=link_to education.name ,education_courses_path(education)%><br>
                  </div>
             </div>
         </div>

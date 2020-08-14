@@ -15,6 +15,27 @@ ActiveRecord::Schema.define(version: 202008080210763) do
   create_table "courses", force: :cascade do |t|
     t.string "name"
     t.string "price"
+    t.string "duration"
+    t.integer "education_id"
+    t.integer "institute_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "educations", force: :cascade do |t|
+    t.string "name"
+    t.string "resource"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
+  end
+
+  create_table "institutes", force: :cascade do |t|
+    t.string "name"
     t.string "url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -27,25 +48,6 @@ ActiveRecord::Schema.define(version: 202008080210763) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["session_id"], name: "index_sessions_on_session_id", unique: true
     t.index ["updated_at"], name: "index_sessions_on_updated_at"
-  end
-
-  create_table "t_courses", force: :cascade do |t|
-    t.integer "tech_id"
-    t.integer "course_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "teches", force: :cascade do |t|
-    t.string "name"
-    t.string "resource"
-    t.integer "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "image_file_name"
-    t.string "image_content_type"
-    t.integer "image_file_size"
-    t.datetime "image_updated_at"
   end
 
   create_table "users", force: :cascade do |t|

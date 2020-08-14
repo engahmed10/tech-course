@@ -2,8 +2,8 @@
 <%= simple_form_for @course do |f| %>
   <%= f.input :name %>
   <%= f.input :price %>
-  <%= f.input :url %>
+  <%= f.input :duration %>
+  <%= f.collection_select :education_id,Education.all,:id,:name,:prompt => true%>
   <%= f.button :submit %>
 <% end %>
-
 </div>

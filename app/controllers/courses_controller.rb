@@ -4,14 +4,13 @@ class CoursesController < ApplicationController
   #before_action :authenticate_admin! ,only: [:index,:show]
 
     def index
-      #byebug
-       if params[:tech_id]
-            @tech = Tech.find_by(params[:tech_id])
-            if @tech.nil?
-                flash[:alert]="Tech not found"
-                redirect_to teches_path  # alert 'Tech not found'
+        if params[:education_id]
+            @education= Education.find_by(params[:education_id])
+            if @education.nil?
+                flash[:alert]="Education not found"
+                redirect_to educations_path  # alert 'Education not found'
             else
-              @courses = @tech.courses
+              @courses = @education.courses
             end
         else
             @courses=Course.all
@@ -21,34 +20,34 @@ class CoursesController < ApplicationController
 
     def new    
 
-        if params[:tech_id] && !Tech.exists?(params[:tech_id])
-            redirect_to teches_path alert="Tech not found"
+        if params[:education_id] && !Education.exists?(params[:education_id])
+            redirect_to educations_path alert="Education not found"
         else
-           @course = Tech.find_by(params[:tech_id]).courses.build
-           
+          # @course = Educaion.find_by(params[:education_id]).courses.build
+           @course=Course.new(education_id: params[:education_id])
         end
     end
 
     def create
-        @course = Course.new(coures_params)
-        if @course.save 
-          redirect_to @course
+        course = Course.new(course_params)
+        if course.save 
+          redirect_to course
         else
-            render :new
+          render :new
         end
     end
 
     def show
-       if params[:tech_id]
+       if params[:education_id]
           #@tech=Tech.find_by(id: params[:tech_id])
-          @tech =Tech.where(id:params[:tech_id]).take
-          if ! @tech
-               flas[:alert] ="Tech not found"
-               redirect_to teches_path
+          @education =Education.where(id:params[:education_id]).take
+          if ! @eduaction
+               flas[:alert] ="Eduaction not found"
+               redirect_to educations_path
           end
-             @course = @tech.courses.find_by(id: params[:id])
+             @course = @education.courses.find_by(id: params[:id])
           if @course.nil?
-            redirect_to tech_courses_path(@tech) alert="Course not found"
+            redirect_to education_courses_path(@education) alert="Course not found"
           end 
        else
            @course=Course.find(params[:id])   
@@ -56,38 +55,40 @@ class CoursesController < ApplicationController
     end
 
     def edit
-        if params[:tech_id]
-            tech =Tech.find_by(id: params[:tech_id])
-           if tech.nil?
-              redirect_to  teches_path alert="Tech not found"
-           end
-           @course = tech.courses.find_by(id: params[:id])
-           if @course.nil?
-              redirect_to tech_courses_path(tech)
+        @course= Course.find_by(id:params[:id])
+
+        if params[:education_id]
+            education =Education.find_by(id: params[:education_id])
+           if education.nil?
+              redirect_to  educations_path alert="Education not found"
+           else
+            @course = education.courses.find_by(id: params[:id])
+            redirect_to education_courses_path(eduaction) if @course.nil?
            end               
 
         else
-              @course=Course.find(id: params[:id])
+              @course=Course.find_by(id: params[:id])
         end
+
     end
 
     def update
 
-       @course=Course.find(id: params[:id])
+       @course=Course.find_by(id: params[:id])
        @course.update(course_params)
-
        if @course.save 
            redirect_to @course
        else
            render :edit
        end
+
     end
 
     def destroy
 
        @course =Course.find(id: params[:id])
        @course.delete 
-       flas[:notice] = "Course deleted"
+       flash[:notice] = "Course deleted"
        redirect_to courses_path
     
     end
@@ -99,7 +100,7 @@ class CoursesController < ApplicationController
      #end
 
      def course_params
-      params.require(:course).permit(:name,:price,:url)
+       params.require(:course).permit(:name,:price,:duration,:education_id)
      end
 
 end
