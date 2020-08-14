@@ -30,6 +30,7 @@ class CoursesController < ApplicationController
 
     def create
         course = Course.new(course_params)
+       # byebug
         if course.save 
           redirect_to course
         else
@@ -42,13 +43,15 @@ class CoursesController < ApplicationController
           #@tech=Tech.find_by(id: params[:tech_id])
           @education =Education.where(id:params[:education_id]).take
           if ! @eduaction
-               flas[:alert] ="Eduaction not found"
+               flash[:alert] ="Eduaction not found"
                redirect_to educations_path
-          end
+          else
              @course = @education.courses.find_by(id: params[:id])
           if @course.nil?
-            redirect_to education_courses_path(@education) alert="Course not found"
+            flash[:alert]="Course not found"
+            redirect_to education_courses_path(@education) #alert="Course not found"
           end 
+        end
        else
            @course=Course.find(params[:id])   
        end 
@@ -100,7 +103,7 @@ class CoursesController < ApplicationController
      #end
 
      def course_params
-       params.require(:course).permit(:name,:price,:duration,:education_id)
+       params.require(:course).permit(:name,:course_description,:cost_total,:duration,:education_id,:institiute_id)
      end
 
 end

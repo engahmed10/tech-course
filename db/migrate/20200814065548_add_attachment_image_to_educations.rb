@@ -1,4 +1,4 @@
-class AddAttachmentImageToEducation < ActiveRecord::Migration[6.0]
+class AddAttachmentImageToEducations < ActiveRecord::Migration[6.0]
   def self.up
     change_table :educations do |t|
       t.attachment :image
@@ -9,3 +9,4 @@ class AddAttachmentImageToEducation < ActiveRecord::Migration[6.0]
     remove_attachment :educations, :image
   end
 end
+

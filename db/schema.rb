@@ -14,8 +14,9 @@ ActiveRecord::Schema.define(version: 202008080210763) do
 
   create_table "courses", force: :cascade do |t|
     t.string "name"
-    t.string "price"
+    t.string "course_description"
     t.string "duration"
+    t.string "cost_total"
     t.integer "education_id"
     t.integer "institute_id"
     t.datetime "created_at", precision: 6, null: false
@@ -36,6 +37,9 @@ ActiveRecord::Schema.define(version: 202008080210763) do
 
   create_table "institutes", force: :cascade do |t|
     t.string "name"
+    t.string "address"
+    t.string "city"
+    t.integer "phone"
     t.string "url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

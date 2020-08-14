@@ -12,7 +12,7 @@ class EducationsController < ApplicationController
    end
 
    def show
-       
+      
    end
 
    def new
@@ -58,5 +58,6 @@ class EducationsController < ApplicationController
 
    def find_education
        @education=Education.find(params[:id])
+    
    end
 end

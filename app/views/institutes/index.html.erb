@@ -1,0 +1,17 @@
+<div class="container">
+   <div class="row">
+      <% @institutes.each do |institute|%>
+       <div class="col-sm-4 ">
+           <div class="thumbnail">
+                <div class="caption">
+                   <%=link_to institute.name ,""%><br>
+                   <%=link_to institute.address ,""%><br>
+                    <%=link_to institute.city ,""%><br>
+                   <%=link_to institute.phone ,""%><br>
+                    <%=link_to institute.url ,""%><br>
+                 </div>
+            </div>
+        </div>
+      <%end%>
+    </div>
+</div>

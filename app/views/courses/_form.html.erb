@@ -1,9 +1,11 @@
 <div class="container">
 <%= simple_form_for @course do |f| %>
   <%= f.input :name %>
-  <%= f.input :price %>
+  <%= f.input :coursedescription %>
+  <%= f.input :cost_total %>
   <%= f.input :duration %>
-  <%= f.collection_select :education_id,Education.all,:id,:name,:prompt => true%>
+  <%= f.collection_select :education_id,Education.all,:id,:name,:prompt => true %>
+  <%= f.collection_select :institute_id,Institute.all,:id,:name,:prompt => true%>
   <%= f.button :submit %>
 <% end %>
 </div>
