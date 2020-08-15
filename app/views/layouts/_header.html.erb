@@ -1,26 +1,32 @@
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar">ahmed</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-      <img src="assets/images/logo.png" alt="Logo" class="navbar-brand img-thumbnail" >
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#myPage">HOME</a></li>
-        <li><a href="#band">Techs</a></li>
-        
+    <div class="nav navbar-nav  navbar-right">
+
+          <div class="btn">
+              <%= form_tag( courses_path , method: :get) do |f| %>
+                <%= label_tag(:q, "Search for:") %>
+                <%= text_field_tag(:q ,params[:q]) %>
+                <%= submit_tag("Search") %>
+              <% end %>
+          </div>
+
         <%if !current_user%>
       
         <li><%=link_to 'Log in', new_user_session_path%></li>
         <li><%=link_to 'Sign up', new_user_registration_path %></li>
      
         <%else%>
-        <li><%=link_to 'Log out',{controller: "application",action:"destroy"}%></li>
+        <li><%=link_to 'LOG OUT',{controller: "application",action:"destroy"}%></li>
         <%end%>
+
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-left">
+        <li><%=link_to "HOME",root_path%></li>
+        <li><%=link_to "COURSES" ,courses_path%></a></li>
+        <li><%=link_to "INSTITUTES",institutes_path%></li>
+       
+
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">MORE
           <span class="caret"></span></a>
@@ -30,7 +36,7 @@
             <li><a href="#">Media</a></li> 
           </ul>
         </li>
-        <li><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>
+          
       </ul>
     </div>
   </div>

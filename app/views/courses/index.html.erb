@@ -1,12 +1,19 @@
 <div class="container">
-<%@courses.each do |course| %>
-Course Name: <%=course.name%><br>
-Course Description: <%= course.coursedescription %>
-Total Cost:  <%= course.cost_total %>
-Course duration: <%= course.duration %>
-Institute Name:  <%= course.institute.name %>
-Education type : <%= course.education.name %>
-<%end%>
+  <div class="row">
+    <%@courses.each do |course| %>
+      <div class="col-sm-6 ">
+           <div class="thumbnail">
+             <div class="caption">
+            <strong>Course Name: </strong><%=course.name%><br>
+            <strong>Course Description:</strong> <%= course.course_description %><br>
+            <strong>Total Cost: </strong><%= course.cost_total %><br>
+           <strong> Course duration:</strong> <%= course.duration %><br>
+           <strong> Institute Name: </strong> <%= course.institute.name %>
+            </div>
+         </div>
+       </div>
+    <%end%>
+   </div> 
 </div>
 
 

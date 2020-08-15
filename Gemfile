@@ -22,9 +22,8 @@ gem 'activerecord-session_store'
 gem 'omniauth-facebook'
 # Development ENV Variables
 gem 'figaro'
-
-
 gem 'bootsnap', '>= 1.4.2', require: false
+gem 'backup_rails'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

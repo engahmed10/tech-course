@@ -4,6 +4,13 @@ class CoursesController < ApplicationController
   #before_action :authenticate_admin! ,only: [:index,:show]
 
     def index
+    
+      if params[:q]
+        @courses= Course.search_by(params[:q])
+        if @courses.nil?
+          redirect_to courses_path
+        end
+      else  
         if params[:education_id]
             @education= Education.find_by(params[:education_id])
             if @education.nil?
@@ -15,6 +22,7 @@ class CoursesController < ApplicationController
         else
             @courses=Course.all
         end
+      end
       
     end
 
