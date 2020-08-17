@@ -14,5 +14,6 @@
  *= require_self
  */
 
-@import "bootstrap-sprockets";
-@import "bootstrap";
+.dropdown:hover .dropdown-menu {
+    display: block;
+}

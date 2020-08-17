@@ -6,13 +6,14 @@ class CoursesController < ApplicationController
     def index
     
       if params[:q]
-        @courses= Course.search_by(params[:q])
+        @courses= Course.search_by_word(params[:q])
+       
         if @courses.nil?
           redirect_to courses_path
         end
       else  
         if params[:education_id]
-            @education= Education.find_by(params[:education_id])
+            @education= Education.find_by(id: params[:education_id])
             if @education.nil?
                 flash[:alert]="Education not found"
                 redirect_to educations_path  # alert 'Education not found'
@@ -30,17 +31,21 @@ class CoursesController < ApplicationController
 
         if params[:education_id] && !Education.exists?(params[:education_id])
             redirect_to educations_path alert="Education not found"
-        else
-          # @course = Educaion.find_by(params[:education_id]).courses.build
-           @course=Course.new(education_id: params[:education_id])
+        else 
+          @course=Course.new(education_id: params[:education_id])
+               
         end
     end
 
     def create
-        course = Course.new(course_params)
-       # byebug
-        if course.save 
-          redirect_to course
+      @course = Course.new(course_params)  
+         
+         if  @course.education_id.nil?
+            @course.education_id=params[:course][:education_id].keys.inject
+         end
+        if @course.save 
+          
+          redirect_to @course
         else
           render :new
         end
@@ -96,8 +101,8 @@ class CoursesController < ApplicationController
     end
 
     def destroy
-
-       @course =Course.find(id: params[:id])
+    
+       @course =Course.find(params[:id])
        @course.delete 
        flash[:notice] = "Course deleted"
        redirect_to courses_path
@@ -109,9 +114,9 @@ class CoursesController < ApplicationController
      #def find_course
       #   Course.find(params[:id])
      #end
-
+    # "<input type=\"hidden\" name=\"course[education_id][4]\" id=\"course_education_id_4\" />"
      def course_params
-       params.require(:course).permit(:name,:course_description,:cost_total,:duration,:education_id,:institiute_id)
+       params.require(:course).permit(:name,:course_description,:cost_total,:duration,:education_id,:institute_id)
      end
 
 end

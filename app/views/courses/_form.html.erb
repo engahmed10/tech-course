@@ -1,11 +1,30 @@
 <div class="container">
 <%= simple_form_for @course do |f| %>
-  <%= f.input :name %>
+
+ <% if @course.errors.any? %>
+    <div id="error_explanation">
+      <h2>There were some errors:</h2>
+      <ul>
+        <% @course.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field<%= ' field_with_errors' if @course.errors[:name].any? %>">
+     <%= f.input :name %>
+  </div>
+
   <%= f.input :course_description %>
   <%= f.input :cost_total %>
   <%= f.input :duration %>
-  <%= f.collection_select :education_id,Education.all,:id,:name,:prompt => true %>
+
+  <%= education_id_field(@course) %>
+
+   Find Institute:
   <%= f.collection_select :institute_id,Institute.all,:id,:name,:prompt => true%>
+  
   <%= f.button :submit %>
 <% end %>
 </div>

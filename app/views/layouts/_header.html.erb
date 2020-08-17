@@ -1,15 +1,21 @@
 <nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid">
-    <div class="nav navbar-nav  navbar-right">
 
-          <div class="btn">
+  <div class="container-fluid">
+   
+    <div class="nav navbar-nav  navbar-right">
+   
+          <div class="btn  col-sm ">
               <%= form_tag( courses_path , method: :get) do |f| %>
-                <%= label_tag(:q, "Search for:") %>
+           
+                <%= label_tag(:q, "Search for:")%>
+                 
                 <%= text_field_tag(:q ,params[:q]) %>
+      
                 <%= submit_tag("Search") %>
               <% end %>
           </div>
 
+      
         <%if !current_user%>
       
         <li><%=link_to 'Log in', new_user_session_path%></li>
@@ -25,21 +31,24 @@
         <li><%=link_to "HOME",root_path%></li>
         <li><%=link_to "COURSES" ,courses_path%></a></li>
         <li><%=link_to "INSTITUTES",institutes_path%></li>
-       
-
+        
         <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">MORE
-          <span class="caret"></span></a>
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">ALL ACTIONS</a>
+    
           <ul class="dropdown-menu">
-            <li><a href="#">Merchandise</a></li>
-            <li><a href="#">Extras</a></li>
-            <li><a href="#">Media</a></li> 
+             <li class="dropdown-item"><%=link_to "CREATE COURSE",new_course_path%></li>
+              <li class="dropdown-item"><%=link_to "CREATE INSTITUTE",new_institute_path%></li>
+               <li class="dropdown-item"><%=link_to "CREATE EDUCATION",new_education_path%></li>
           </ul>
+
         </li>
           
       </ul>
+     
     </div>
+
   </div>
+  
 </nav>
 </div>
 

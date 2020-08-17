@@ -7,8 +7,15 @@
             <strong>Course Name: </strong><%=course.name%><br>
             <strong>Course Description:</strong> <%= course.course_description %><br>
             <strong>Total Cost: </strong><%= course.cost_total %><br>
-           <strong> Course duration:</strong> <%= course.duration %><br>
-           <strong> Institute Name: </strong> <%= course.institute.name %>
+             <strong> Course duration:</strong> <%= course.duration %><br>
+
+             <%if !course.institute.nil?%>
+              <strong> Institute Name: </strong> <%= course.institute.name %><br>
+              <%end%>
+             <%if  !course.education.nil?%>
+                 <strong> Institute Name: </strong> <%= course.education.name %>
+            <%end%>
+
             </div>
          </div>
        </div>
