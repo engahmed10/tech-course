@@ -18,14 +18,7 @@ class Course  < ApplicationRecord
         self.all.where("name LIKE ?","%#{word}%")
     end
     
-    def education_name
-      self.try(:education).try(:name)
-    end
-
-    def education_name=(name)
-        @education=Education.find_or_create_by(name: name)
-        self.education = @education
-    end
+    
 
 end
 

@@ -4,7 +4,7 @@
       <div class="col-sm-6 ">
            <div class="thumbnail">
              <div class="caption">
-            <strong>Course Name: </strong><%=course.name%><br>
+            <strong>Course Name: </strong><%=link_to course.name,course_path(course)%><br>
             <strong>Course Description:</strong> <%= course.course_description %><br>
             <strong>Total Cost: </strong><%= course.cost_total %><br>
              <strong> Course duration:</strong> <%= course.duration %><br>

@@ -53,7 +53,6 @@ class CoursesController < ApplicationController
 
     def show
        if params[:education_id]
-          #@tech=Tech.find_by(id: params[:tech_id])
           @education =Education.where(id:params[:education_id]).take
           if ! @eduaction
                flash[:alert] ="Eduaction not found"
