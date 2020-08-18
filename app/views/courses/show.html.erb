@@ -3,11 +3,23 @@
     Course Description: <%= @course.course_description %><br>
     Total Cost:  <%= @course.cost_total %><br>
     Course duration: <%= @course.duration %><br>
+    <%if  !@course.institute.nil?%>
+
+            Institute Name:  <%= @course.institute.name %>
+    <%end%>
+
     <%if  !@course.education.nil?%>
-        Institute Name:  <%= @course.institute.name %>
         Education type : <%= @course.education.name %> 
     <%end%>
 </div>
 
  <%= button_to "Delete", course_path(:id => @course.id), :method => :delete %>
 <%= button_to "Edit", edit_course_path,:method => :get%>
+
+
+
+<%if  !@course.education.nil?%>
+ <div>
+    <%=  link_to  "CREATE COURSE",new_education_course_path(@course.education)%>
+ </div>
+<%end%>

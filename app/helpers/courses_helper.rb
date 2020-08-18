@@ -6,7 +6,7 @@ module CoursesHelper
             select_tag("course[education_id]",options_from_collection_for_select(Education.all,:id,:name,:prompt => true))
           else 
           
-           hidden_field "course[education_id]",course.education_id
+           hidden_field "course[education_id]",course.education_id  
            
         end          
 

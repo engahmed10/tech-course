@@ -16,12 +16,13 @@ class CoursesController < ApplicationController
             @education= Education.find_by(id: params[:education_id])
             if @education.nil?
                 flash[:alert]="Education not found"
-                redirect_to educations_path  # alert 'Education not found'
+                redirect_to educations_path 
             else
               @courses = @education.courses
             end
         else
-            @courses=Course.all
+            #@courses=Course.all
+            @courses=Course.order_by_course_duration
         end
       end
       

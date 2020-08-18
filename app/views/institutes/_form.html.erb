@@ -1,13 +1,14 @@
+
 <div class="container">
 <%= form_tag institutes_path  do %>
 <label>Name:</label>
-<%= text_field_tag :name %>
+<%= text_field_tag :name %><br>
 <label>Address:</label>
-<%=text_field_tag :address %>
+<%=text_field_tag :address %><br>
 <label>City:</label>
-<%=text_field_tag :city %>
+<%=text_field_tag :city %><br>
 <label>Url:</label>
-<%=text_field_tag :url %>
-<%=submit_tag %>
+<%=text_field_tag :url %><br>
+<%=submit_tag "Create Institute"%>
 <% end %>
 </div>

@@ -7,6 +7,8 @@ class Course  < ApplicationRecord
     validates :cost_total, presence: true
     validates :course_description,presence: true
 
+    scope :order_by_course_duration,->{self.order(:name => :ASC)}
+
     def self.search_by(word)
         institute=Institute.find_by(:name => word)
         if institute 
@@ -18,6 +20,7 @@ class Course  < ApplicationRecord
         self.all.where("name LIKE ?","%#{word}%")
     end
     
+
     
 
 end

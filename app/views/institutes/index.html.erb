@@ -1,17 +1,18 @@
 <div class="container">
    <div class="row">
       <% @institutes.each do |institute|%>
-       <div class="col-sm-4 ">
-           <div class="thumbnail">
-                <div class="caption">
-                   <%=institute.name %><br>
-                   <%=institute.address %><br>
-                   <%=institute.city %><br>
-                   <%= institute.phone %><br>
-                   <%= institute.url %><br>
-                 </div>
+    
+             <div class="col-sm-6">
+        
+               <div class="thumbnail">
+                      <%=institute.name %><br>
+                      <%=institute.address %><br>
+                      <%=institute.city %><br>
+                      <%= institute.phone %><br>
+                      <%= institute.url %><br>
+           
+                </div>
             </div>
-        </div>
       <%end%>
     </div>
 </div>
