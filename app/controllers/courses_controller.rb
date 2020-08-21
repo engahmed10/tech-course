@@ -7,7 +7,6 @@ class CoursesController < ApplicationController
     
       if params[:q]
         @courses= Course.search_by_word(params[:q])
-       
         if @courses.nil?
           redirect_to courses_path
         end
@@ -32,14 +31,12 @@ class CoursesController < ApplicationController
         if params[:education_id] && !Education.exists?(params[:education_id])
             redirect_to educations_path alert="Education not found"
         else 
-          @course=Course.new(education_id: params[:education_id])
-               
+          @course=Course.new(education_id: params[:education_id])  
         end
     end
 
     def create
-      @course = Course.new(course_params)  
-         
+          @course = Course.new(course_params)  
          if  @course.education_id.nil?
             @course.education_id=params[:course][:education_id].keys.inject
          end
@@ -54,16 +51,19 @@ class CoursesController < ApplicationController
     def show
        if params[:education_id]
           @education =Education.where(id:params[:education_id]).take
-          if ! @eduaction
+       
+          if ! @education
                flash[:alert] ="Eduaction not found"
-               redirect_to educations_path
+               redirect_to educations_path , alert: "Education not found."
           else
+           
              @course = @education.courses.find_by(id: params[:id])
-          if @course.nil?
-            flash[:alert]="Course not found"
-            redirect_to education_courses_path(@education) #alert="Course not found"
-          end 
-        end
+             
+            if @course.nil?
+              flash[:alert]="Course not found"
+              redirect_to education_courses_path(@education) , alert: "Course not found"
+            end 
+          end
        else
            @course=Course.find(params[:id])   
        end 
@@ -75,7 +75,7 @@ class CoursesController < ApplicationController
         if params[:education_id]
             education =Education.find_by(id: params[:education_id])
            if education.nil?
-              redirect_to  educations_path alert="Education not found"
+              redirect_to  educations_path , alert: "Education not found"
            else
             @course = education.courses.find_by(id: params[:id])
             redirect_to education_courses_path(eduaction) if @course.nil?
