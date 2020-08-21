@@ -6,22 +6,22 @@ class CoursesController < ApplicationController
     def index
     
       if params[:q]
-        @courses= Course.search_by_word(params[:q])
-        if @courses.nil?
-          redirect_to courses_path
-        end
-      else  
-        if params[:education_id]
-            @education= Education.find_by(id: params[:education_id])
-            if @education.nil?
-                flash[:alert]="Education not found"
-                redirect_to educations_path 
-            else
-              @courses = @education.courses
-            end
-        else
-            @courses=Course.all
-        end
+          @courses= Course.search_by_word(params[:q])
+          if @courses.nil?
+            redirect_to courses_path
+          end
+      else          
+           if ! params[:education_id].nil?
+                 @education= Education.find_by(id: params[:education_id])
+                if @education.nil?
+                    flash[:alert]="Education not found"
+                    redirect_to educations_path 
+                else
+                  @courses = @education.courses
+                end
+           else
+                @courses=Course.all
+           end
       end
       
     end
