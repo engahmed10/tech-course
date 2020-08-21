@@ -1,12 +1,29 @@
 <div class="container">
 <%=form_for @education ,html: {multipart: true} do |f|%>
+
+ <% if @education.errors.any? %>
+    <div id="error_explanation">
+      <h2>There were some errors:</h2>
+      <ul>
+        <% @education.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
 <%=f.label :image%><br>
 <%= f.file_field :image %><br>
+
 <%=f.label :name%>
+<div class="field<%= ' field_with_errors' if @education.errors[:name].any? %>">
 <%=f.text_field :name%>
+</div>
+
 <%=f.label :resource%>
 <%=f.text_field :resource%>
 <br><br>
+
 
 Select Course:
 <%= f.collection_select :course_ids, Course.all, :id, :name , :include_blank => "Please select"%><br>

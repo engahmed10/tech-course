@@ -4,7 +4,7 @@ class CoursesController < ApplicationController
   #before_action :authenticate_admin! ,only: [:index,:show]
 
     def index
-    
+       
       if params[:q]
           @courses= Course.search_by_word(params[:q])
           if @courses.nil?
@@ -15,7 +15,7 @@ class CoursesController < ApplicationController
                  @education= Education.find_by(id: params[:education_id])
                 if @education.nil?
                     flash[:alert]="Education not found"
-                    redirect_to educations_path 
+                    redirect_to educations_path , alert: "Education not found"
                 else
                   @courses = @education.courses
                 end
@@ -38,7 +38,7 @@ class CoursesController < ApplicationController
     def create
           @course = Course.new(course_params)  
          if  @course.education_id.nil?
-            @course.education_id=params[:course][:education_id].keys.inject
+             @course.education_id=params[:course][:education_id].keys.inject
          end
         if @course.save 
           

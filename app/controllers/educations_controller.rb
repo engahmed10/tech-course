@@ -7,6 +7,7 @@ class EducationsController < ApplicationController
    
    
    def index
+    
        @educations = Education.all
    end
 
@@ -20,13 +21,13 @@ class EducationsController < ApplicationController
    end
    
    def create
-       
-       @education=current_user.educations.create(education_params)
 
+       @education=current_user.educations.create(education_params)
+       
        if @education.valid?
-           redirect_to education_path(@education)
+        redirect_to education_path(@education)
        else
-           render :new     
+        render :new     
        end
    end
 
@@ -54,11 +55,16 @@ class EducationsController < ApplicationController
    private
    
    def education_params
-     params.require(:education).permit(:name,:resource,:image,:course_ids,courses_attributes: [:name,:course_description,:cost_total,:duration])
-   end
+       
+        if ! params[:education][:course_ids].blank?
+          params.require(:education).permit(:name,:resource,:image,:course_ids)
+        else 
+          params.require(:education).permit(:name,:resource,:image,courses_attributes: [:name,:course_description,:cost_total,:duration])
+        end
+    end
 
    def find_education
        @education=Education.find(params[:id])
    end
-   
+
 end
