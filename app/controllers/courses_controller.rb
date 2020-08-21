@@ -21,8 +21,7 @@ class CoursesController < ApplicationController
               @courses = @education.courses
             end
         else
-            #@courses=Course.all
-            @courses=Course.order_by_course_duration
+            @courses=Course.all
         end
       end
       
@@ -114,9 +113,8 @@ class CoursesController < ApplicationController
      #def find_course
       #   Course.find(params[:id])
      #end
-    # "<input type=\"hidden\" name=\"course[education_id][4]\" id=\"course_education_id_4\" />"
      def course_params
-       params.require(:course).permit(:name,:course_description,:cost_total,:duration,:education_id,:institute_id)
+       params.require(:course).permit(:name,:course_description,:cost_total,:duration, :education_id,:institute_id)
      end
 
 end

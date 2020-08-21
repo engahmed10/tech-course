@@ -6,6 +6,24 @@
 <%=f.text_field :name%>
 <%=f.label :resource%>
 <%=f.text_field :resource%>
-<%=f.button %>
+<br><br>
+
+Select Course:
+<%= f.collection_select :course_ids, Course.all, :id, :name , :include_blank => "Please select"%><br>
+Or Create <br>
+New Course :<br>
+<%=f.fields_for :courses , @education.courses.build do |co|%>
+ <%=co.label :name%>
+ <%=co.text_field :name %>
+ <%=co.label :Description%>
+ <%=co.text_field :course_description %>
+ <%=co.label :duration%>
+ <%=co.text_field :duration %>
+ <br>
+ <%=co.label :total_cost %>
+ <%=co.text_field :cost_total %>
+<%end%><br><br>
+
+<%=f.submit %>
 <%end%>
 </div>
