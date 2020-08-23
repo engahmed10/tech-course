@@ -16,19 +16,24 @@ class EducationsController < ApplicationController
    end
 
    def new
-     @education=current_user.educations.build
+     @education = current_user.educations.build
      @education.courses.build(:name=>"course")
    end
    
    def create
-
-       @education=current_user.educations.create(education_params)
-       
+    
+       @education = current_user.educations.build(name:params[:education][:name],image:params[:education][:image],resource:params[:education][:resource])
+       @course=current_user.courses.build(education_params)
+       @course.education = @education
+       @course.save
+       byebug
        if @education.valid?
-        redirect_to education_path(@education)
+          @education.courses << @course
+          redirect_to education_path(@education)
        else
-        render :new     
+          render :new     
        end
+
    end
 
    def edit
@@ -36,7 +41,7 @@ class EducationsController < ApplicationController
    end
    
    def update
-       @education.update(education_params)
+         @education.update(education_params)
        if @education.valid?
            redirect_to education_path(@education)
        else
@@ -54,12 +59,12 @@ class EducationsController < ApplicationController
 
    private
    
-   def education_params
-       
+   def education_params     
         if ! params[:education][:course_ids].blank?
-          params.require(:education).permit(:name,:resource,:image,:course_ids)
+           params.require(:education).permit(:name,:resource,:image,:course_ids)
+        
         else 
-          params.require(:education).permit(:name,:resource,:image,courses_attributes: [:name,:course_description,:cost_total,:duration])
+          params.require(:education).require(:courses).permit(:name,:course_description,:cost_total,:duration,:institute_id)
         end
     end
 

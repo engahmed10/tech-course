@@ -27,6 +27,7 @@
 
 Select Course:
 <%= f.collection_select :course_ids, Course.all, :id, :name , :include_blank => "Please select"%><br>
+
 Or Create <br>
 New Course :<br>
 <%=f.fields_for :courses , @education.courses.build do |co|%>
@@ -39,6 +40,8 @@ New Course :<br>
  <br>
  <%=co.label :total_cost %>
  <%=co.text_field :cost_total %>
+
+ <%=co.collection_select :institute_id,Institute.all,:id,:name,:prompt => true%> 
 <%end%><br><br>
 
 <%=f.submit %>

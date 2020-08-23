@@ -1,6 +1,7 @@
 <%=flash[:alert]%>
 <div class="container">
   <div class="row ">
+  <% if ! @courses.nil?%>
     <%@courses.each do |course| %>
       <div class="col-sm-6 ">
            <div class="thumbnail text-justify  ">
@@ -20,10 +21,10 @@
                 <%if  !course.education.nil?%>
                     <strong> Education Name: </strong> <%= course.education.name %>
                 <%end%>
-
          </div>
        </div>
       
+    <%end%>
     <%end%>
    </div> 
 </div>

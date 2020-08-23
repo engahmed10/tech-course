@@ -6,6 +6,6 @@ class CreateSessions < ActiveRecord::Migration[6.0]
         t.timestamps
       end
       add_index :sessions, :session_id, unique: true
-        add_index :sessions, :updated_at
+      add_index :sessions, :updated_at
     end
   end
