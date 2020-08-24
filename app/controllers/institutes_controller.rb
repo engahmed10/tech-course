@@ -3,7 +3,8 @@ class InstitutesController < ApplicationController
    before_action :find_institute ,only: [:show,:edit,:update]
 
     def index 
-     @institutes=Institute.all
+    # @institutes=Institute.all
+     Institute.order_by_name
     end
 
     def new

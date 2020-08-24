@@ -26,8 +26,9 @@ class EducationsController < ApplicationController
        @course=current_user.courses.build(education_params)
        @course.education = @education
        @course.save
-       byebug
+       
        if @education.valid?
+        
           @education.courses << @course
           redirect_to education_path(@education)
        else

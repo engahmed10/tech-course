@@ -21,8 +21,9 @@ class CoursesController < ApplicationController
                   @courses =courses.where(user:current_user)                                    
                 end             
             else 
-              user=User.where(admin: true).take
-              @courses=user.courses       
+               # @courses= Course.order_by_course_name
+             user=User.where(admin: true).take
+             @courses=user.courses       
            end
       end
     end

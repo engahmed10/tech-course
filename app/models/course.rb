@@ -7,8 +7,8 @@ class Course  < ApplicationRecord
     validates :duration, presence: true
     validates :cost_total, presence: true
     validates :course_description,presence: true
-   
-    scope :order_by_course_name,->{self.order(:name => :ASC)}
+ 
+    scope :order_by_course_name,->{(limit(20).order(:name))}
 
     def self.search_by(word)
         institute=Institute.find_by(:name => word)
